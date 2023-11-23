@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin; // Corrected namespace declaration
+namespace App\Http\Controllers\Admin;
 
+use App\Models\Arena;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Arena;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\Admin\ArenaRequest;
 
@@ -12,36 +12,34 @@ class ArenaController extends Controller
 {
     use MediaUploadingTrait;
     /**
-     * 
-     * @return  \Illuminate\Http\Response
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-
-     public function index()
-     {
+    public function index()
+    {
         $arenas = Arena::all();
 
         return view('admin.arenas.index', compact('arenas'));
-     }
+    }
 
-     /**
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function create()
+    {
+        return view('admin.arenas.create');
+    }
 
-     public function create()
-     {
-        return view('admin.arenas.index');
-     }
-
-       /**
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
-     public function store(ArenaRequest $request)
+    public function store(ArenaRequest $request)
     {
         $arena = Arena::create($request->validated());
         
@@ -55,7 +53,7 @@ class ArenaController extends Controller
         ]);
     }
 
-     /**
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
